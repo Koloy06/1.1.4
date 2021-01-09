@@ -68,7 +68,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        Long userID = null;
         SessionFactory sessionFactory = Util.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
@@ -78,7 +77,7 @@ public class UserDaoHibernateImpl implements UserDao {
             user.setName(name);
             user.setLastName(lastName);
             user.setAge(age);
-            userID = (Long) session.save(user);
+            session.save(user);
             transaction.commit();
             System.out.println("User с именем - " + name + " добавлен в базу данных");
         } catch (Exception e) {
